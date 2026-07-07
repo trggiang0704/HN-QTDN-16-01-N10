@@ -101,6 +101,11 @@ Người sử dụng truy cập theo đường dẫn _http://localhost:8069/_ đ
 ---
 
 ## 🌐 6. Luồng nghiệp vụ kết hợp & Điểm tích hợp HRM (Mức 1 & Mức 2)
-Sơ đồ quy trình nghiệp vụ End-to-End được lưu trữ tại [docs/business-flow/NhomXX_BusinessFlow_TenDeTai.png](docs/business-flow/NhomXX_BusinessFlow_TenDeTai.png).
+Sơ đồ quy trình nghiệp vụ End-to-End được lưu trữ tại [docs/business-flow/Nhom10_BusinessFlow_QuanLyKhachHangVanBan.png](docs/business-flow/Nhom10_BusinessFlow_QuanLyKhachHangVanBan.png).
 * **Mô tả quy trình**: Mô tả chu trình khép kín từ tiếp cận Khách hàng tiềm năng (Lead) -> Nâng cấp thành Khách hàng chính thức -> Tự động hóa tạo Hợp đồng kinh tế -> Phê duyệt & Ban hành Văn bản liên quan -> Tự động hóa ghi nhận lịch sử tương tác của Khách hàng.
 * **Các module tham gia**: **Nhân sự (`nhan_su`)** (dữ liệu nhân viên gốc), **Khách hàng (`khach_hang`)**, và **Quản lý Văn bản (`quan_ly_van_ban`)**.
+
+## 🏗️ 7. Kiến trúc Hệ thống (System Architecture)
+Sơ đồ kiến trúc hệ thống Odoo 3 lớp được lưu trữ tại [docs/system-architecture/Nhom10_SystemArchitecture.png](docs/system-architecture/Nhom10_SystemArchitecture.png) và đặc tả chi tiết tại [docs/system-architecture/README.md](docs/system-architecture/README.md).
+* **Mô tả kiến trúc**: Hệ thống được xây dựng trên mô hình kiến trúc 3 lớp tiêu chuẩn của Odoo (Client Layer - Application Layer - Data Layer).
+* **Điểm nhấn tích hợp**: Kết nối tầng nghiệp vụ sử dụng ORM để đảm bảo tính toàn vẹn dữ liệu từ tầng dữ liệu PostgreSQL, cho phép tích hợp trực tiếp và đồng bộ dữ liệu HRM làm gốc sang CRM và Văn bản.

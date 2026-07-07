@@ -3,7 +3,7 @@
     'name': "Quản lý văn bản",
     'version': '1.0',
 
-    'depends': ['base', 'mail', 'nhan_su'],
+    'depends': ['base', 'mail', 'nhan_su', 'khach_hang'],
     # 'depends': ['base', 'nhan_su', 'khach_hang_clean'],
     # 'depends': ['base', 'mail'],
     'data': [

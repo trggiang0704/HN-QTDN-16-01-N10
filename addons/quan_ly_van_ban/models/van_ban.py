@@ -189,3 +189,29 @@ class QuanLyVanBan(models.Model):
             if rec.trang_thai in ['da_ky', 'hoan_tat']:
                 raise UserError(_("Không thể xóa văn bản đã ban hành hoặc đã hoàn tất để bảo vệ hồ sơ số hóa!"))
         return super(QuanLyVanBan, self).unlink()
+
+class KhachHangInherit(models.Model):
+    _inherit = 'khach_hang'
+
+    van_ban_ids = fields.One2many(
+        'quan_ly_van_ban', 
+        'khach_hang_id', 
+        string="Văn bản liên quan",
+        domain=[('trang_thai', 'in', ['da_ky', 'hoan_tat'])]
+    )
+    van_ban_count = fields.Integer(string="Số văn bản", compute='_compute_van_ban_count')
+
+    def _compute_van_ban_count(self):
+        for rec in self:
+            rec.van_ban_count = len(rec.van_ban_ids)
+
+    def action_view_van_ban(self):
+        self.ensure_one()
+        return {
+            'type': 'ir.actions.act_window',
+            'name': 'Văn bản liên quan',
+            'res_model': 'quan_ly_van_ban',
+            'view_mode': 'kanban,tree,form',
+            'domain': [('khach_hang_id', '=', self.id)],
+            'context': {'default_khach_hang_id': self.id},
+        }

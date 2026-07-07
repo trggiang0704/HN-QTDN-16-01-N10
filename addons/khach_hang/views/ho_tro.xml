@@ -58,10 +58,61 @@
             </field>
         </record>
 
+        <!-- Kanban View of Customer Support -->
+        <record id="view_ho_tro_kanban" model="ir.ui.view">
+            <field name="name">ho_tro.kanban</field>
+            <field name="model">ho_tro_khach_hang</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="trang_thai" class="o_kanban_small_column" create="true">
+                    <field name="id"/>
+                    <field name="tieu_de"/>
+                    <field name="khach_hang_id"/>
+                    <field name="nhan_vien_id"/>
+                    <field name="ngay_tiep_nhan"/>
+                    <field name="muc_do_uu_tien"/>
+                    <field name="trang_thai"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click" style="border-radius: 8px; border-top: 4px solid #e74c3c; box-shadow: 0 4px 6px rgba(0,0,0,0.02); padding: 15px; margin-bottom: 15px; background: white; min-width: 250px;">
+                                <div class="oe_kanban_details">
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                        <field name="muc_do_uu_tien" widget="priority"/>
+                                        <span class="badge badge-pill" style="background-color: #fcf3cf; color: #b7950b; font-size: 9px; padding: 2px 6px;">HỖ TRỢ</span>
+                                    </div>
+
+                                    <strong class="o_kanban_record_title" style="font-size: 14px; color: #2d3748; display: block; margin-bottom: 8px; line-height: 1.3;">
+                                        <field name="tieu_de"/>
+                                    </strong>
+                                    
+                                    <div style="font-size: 11px; color: #718096; margin-bottom: 4px;">
+                                        <i class="fa fa-user" style="color: #3498db; margin-right: 5px;"></i> Khách hàng: <field name="khach_hang_id"/>
+                                    </div>
+                                    <div style="font-size: 11px; color: #718096; margin-bottom: 4px;">
+                                        <i class="fa fa-user-circle" style="color: #9b59b6; margin-right: 5px;"></i> Người xử lý: <field name="nhan_vien_id"/>
+                                    </div>
+                                    <div style="font-size: 11px; color: #718096; margin-bottom: 10px;">
+                                        <i class="fa fa-clock-o" style="color: #e67e22; margin-right: 5px;"></i> Ngày nhận: <field name="ngay_tiep_nhan"/>
+                                    </div>
+
+                                    <!-- Bottom Row Action -->
+                                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #edf2f7; padding-top: 10px;">
+                                        <span class="badge badge-pill" style="font-size: 10px; padding: 3px 8px; font-weight: bold; background-color: #f4f6f7; color: #7f8c8d;">
+                                            <field name="trang_thai"/>
+                                        </span>
+                                        <a type="open" class="btn btn-sm btn-outline-primary" role="button" style="border-radius: 4px; padding: 2px 10px; font-size: 10px; color: #e74c3c; border-color: #e74c3c; cursor: pointer;">Chi tiết</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
         <record id="action_ho_tro_khach_hang" model="ir.actions.act_window">
             <field name="name">Hỗ trợ khách hàng</field>
             <field name="res_model">ho_tro_khach_hang</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,tree,form</field>
         </record>
     </data>
 </odoo>

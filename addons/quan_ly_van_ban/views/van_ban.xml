@@ -30,24 +30,56 @@
             <field name="name">van_ban.kanban</field>
             <field name="model">quan_ly_van_ban</field>
             <field name="arch" type="xml">
-                <kanban default_group_by="trang_thai" class="o_kanban_mobile">
+                <kanban default_group_by="trang_thai" class="o_kanban_small_column" create="true">
+                    <field name="id"/>
                     <field name="ten_van_ban"/>
                     <field name="so_hieu"/>
+                    <field name="luong_van_ban"/>
+                    <field name="hinh_thuc_van_ban"/>
+                    <field name="ngay_ban_hanh"/>
+                    <field name="nhan_vien_id"/>
+                    <field name="khach_hang_id"/>
                     <field name="trang_thai"/>
                     <templates>
                         <t t-name="kanban-box">
-                            <div class="oe_kanban_global_click">
+                            <div class="oe_kanban_global_click" style="border-radius: 8px; border-top: 4px solid #9b59b6; box-shadow: 0 4px 6px rgba(0,0,0,0.02); padding: 15px; margin-bottom: 15px; background: white; min-width: 250px;">
                                 <div class="oe_kanban_details">
-                                    <strong class="o_kanban_record_title">
+                                    <!-- Header Row -->
+                                    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px;">
+                                        <span class="badge badge-pill" style="background-color: #ebf5fb; color: #2e86c1; font-size: 10px; padding: 3px 8px; font-weight: bold;">
+                                            <field name="hinh_thuc_van_ban"/>
+                                        </span>
+                                        <t t-if="record.luong_van_ban.raw_value == 'den'">
+                                            <span class="badge badge-pill" style="background-color: #e8f8f5; color: #117a65; font-size: 9px; padding: 2px 6px; font-weight: bold;">ĐẾN</span>
+                                        </t>
+                                        <t t-if="record.luong_van_ban.raw_value == 'di'">
+                                            <span class="badge badge-pill" style="background-color: #fdf2e9; color: #d35400; font-size: 9px; padding: 2px 6px; font-weight: bold;">ĐI</span>
+                                        </t>
+                                    </div>
+ 
+                                    <strong class="o_kanban_record_title" style="font-size: 14px; color: #2d3748; display: block; margin-bottom: 8px; line-height: 1.3;">
                                         <field name="ten_van_ban"/>
                                     </strong>
-                                    <div class="o_kanban_record_subtitle">
-                                        <field name="so_hieu"/>
+                                    
+                                    <div style="font-size: 11px; color: #718096; margin-bottom: 4px;">
+                                        <i class="fa fa-tag" style="color: #9b59b6; margin-right: 5px;"></i> Số ký hiệu: <field name="so_hieu"/>
                                     </div>
-                                    <div class="o_kanban_record_bottom">
-                                        <div class="oe_kanban_bottom_left">
-                                            <field name="trang_thai" widget="label_selection" options="{'classes': {'du_thao': 'default', 'hoan_tat': 'success', 'huy': 'danger'}}"/>
-                                        </div>
+                                    <div style="font-size: 11px; color: #718096; margin-bottom: 4px;">
+                                        <i class="fa fa-calendar" style="color: #3498db; margin-right: 5px;"></i> Ngày ban hành: <field name="ngay_ban_hanh"/>
+                                    </div>
+                                    <div style="font-size: 11px; color: #718096; margin-bottom: 4px;">
+                                        <i class="fa fa-building" style="color: #e67e22; margin-right: 5px;"></i> Đối tác: <field name="khach_hang_id"/>
+                                    </div>
+                                    <div style="font-size: 11px; color: #718096; margin-bottom: 10px;">
+                                        <i class="fa fa-user" style="color: #2ecc71; margin-right: 5px;"></i> Người nhận: <field name="nhan_vien_id"/>
+                                    </div>
+ 
+                                    <!-- Bottom Row Action -->
+                                    <div style="display: flex; justify-content: space-between; align-items: center; border-top: 1px solid #edf2f7; padding-top: 10px;">
+                                        <span class="badge badge-pill" style="font-size: 10px; padding: 3px 8px; font-weight: bold; background-color: #f4f6f7; color: #7f8c8d;">
+                                            <field name="trang_thai"/>
+                                        </span>
+                                        <a type="open" class="btn btn-sm btn-outline-primary" role="button" style="border-radius: 4px; padding: 2px 10px; font-size: 10px; color: #9b59b6; border-color: #9b59b6; cursor: pointer;">Chi tiết</a>
                                     </div>
                                 </div>
                             </div>
@@ -149,6 +181,36 @@
             <field name="res_model">quan_ly_van_ban</field>
             <field name="view_mode">kanban,tree,form</field>
             <field name="search_view_id" ref="view_van_ban_search"/>
+        </record>
+
+        <!-- Inherit Customer Form View to Inject Document tab and button -->
+        <record id="view_khach_hang_form_inherit_van_ban" model="ir.ui.view">
+            <field name="name">khach_hang.form.inherit.van_ban</field>
+            <field name="model">khach_hang</field>
+            <field name="inherit_id" ref="khach_hang.view_khach_hang_form"/>
+            <field name="arch" type="xml">
+                <!-- Stat Button Injection -->
+                <xpath expr="//div[@name='button_box']" position="inside">
+                    <button name="action_view_van_ban" type="object" class="oe_stat_button" icon="fa-file-text-o">
+                        <field name="van_ban_count" widget="statinfo" string="Văn bản"/>
+                    </button>
+                </xpath>
+                <!-- Notebook Tab Injection -->
+                <xpath expr="//notebook" position="inside">
+                    <page string="Văn bản &amp; Quyết định" name="documents">
+                        <field name="van_ban_ids" readonly="1">
+                            <tree string="Văn bản liên quan" create="false">
+                                <field name="so_hieu"/>
+                                <field name="ten_van_ban"/>
+                                <field name="luong_van_ban" widget="badge" decoration-info="luong_van_ban == 'den'" decoration-warning="luong_van_ban == 'di'"/>
+                                <field name="hinh_thuc_van_ban"/>
+                                <field name="ngay_ban_hanh"/>
+                                <field name="trang_thai" widget="badge" decoration-success="trang_thai in ['da_ky', 'hoan_tat']"/>
+                            </tree>
+                        </field>
+                    </page>
+                </xpath>
+            </field>
         </record>
     </data>
 </odoo>

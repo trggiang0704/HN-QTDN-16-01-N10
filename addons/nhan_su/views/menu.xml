@@ -1,14 +1,29 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <record id="action_open_nhan_su_dashboard" model="ir.actions.server">
+            <field name="name">Tổng quan</field>
+            <field name="model_id" ref="model_nhan_su_dashboard"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.action_get_dashboard()
+            </field>
+        </record>
+
         <menuitem id="menu_root"
             name="Quản lý nhân sự"
             sequence="0"/>
 
+        <menuitem name="Tổng quan"
+            id="menu_nhan_su_dashboard"
+            parent="menu_root"
+            sequence="1"
+            action="action_open_nhan_su_dashboard"/>
+
         <menuitem name="Nhân viên"
             id="menu_nhan_vien"
             parent="menu_root"
-            sequence="1"
+            sequence="2"
             action="action_nhan_vien"/>
 
         <menuitem name="Lịch sử công tác"

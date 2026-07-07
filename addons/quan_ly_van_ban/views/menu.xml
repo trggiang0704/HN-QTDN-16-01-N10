@@ -51,37 +51,43 @@
         <record id="action_van_ban_den" model="ir.actions.act_window">
             <field name="name">Văn bản đến</field>
             <field name="res_model">quan_ly_van_ban</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="domain">[('luong_van_ban', '=', 'den')]</field>
             <field name="context">{'default_luong_van_ban': 'den', 'default_trang_thai': 'tiep_nhan'}</field>
             <field name="search_view_id" ref="view_van_ban_search"/>
             </record>
-
+ 
         <record id="action_van_ban_di" model="ir.actions.act_window">
             <field name="name">Văn bản đi</field>
             <field name="res_model">quan_ly_van_ban</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="domain">[('luong_van_ban', '=', 'di')]</field>
             <field name="context">{'default_luong_van_ban': 'di', 'default_trang_thai': 'du_thao'}</field>
             <field name="search_view_id" ref="view_van_ban_search"/>
         </record>
-
+ 
         <record id="action_van_ban_noi_bo" model="ir.actions.act_window">
             <field name="name">Văn bản nội bộ</field>
             <field name="res_model">quan_ly_van_ban</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="domain">[('luong_van_ban', '=', 'noi_bo')]</field>
             <field name="context">{'default_luong_van_ban': 'noi_bo'}</field>
             <field name="search_view_id" ref="view_van_ban_search"/>
         </record>
-
+ 
         <record id="action_quan_ly_van_ban_all" model="ir.actions.act_window">
             <field name="name">Tất cả văn bản</field>
             <field name="res_model">quan_ly_van_ban</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="search_view_id" ref="view_van_ban_search"/>
         </record>
 
+        <record id="action_van_ban_den_kanban" model="ir.actions.act_window.view">
+            <field name="sequence" eval="0"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="view_van_ban_kanban"/>
+            <field name="act_window_id" ref="action_van_ban_den"/>
+        </record>
         <record id="action_van_ban_den_tree" model="ir.actions.act_window.view">
             <field name="sequence" eval="1"/>
             <field name="view_mode">tree</field>
@@ -95,6 +101,12 @@
             <field name="act_window_id" ref="action_van_ban_den"/>
         </record>
 
+        <record id="action_van_ban_di_kanban" model="ir.actions.act_window.view">
+            <field name="sequence" eval="0"/>
+            <field name="view_mode">kanban</field>
+            <field name="view_id" ref="view_van_ban_kanban"/>
+            <field name="act_window_id" ref="action_van_ban_di"/>
+        </record>
         <record id="action_van_ban_di_tree" model="ir.actions.act_window.view">
             <field name="sequence" eval="1"/>
             <field name="view_mode">tree</field>

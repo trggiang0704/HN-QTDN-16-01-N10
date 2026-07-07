@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- AI Chatbot Wizard View -->
+        <record id="view_ai_chatbot_wizard_form" model="ir.ui.view">
+            <field name="name">ai.chatbot.wizard.form</field>
+            <field name="model">ai.chatbot.wizard</field>
+            <field name="arch" type="xml">
+                <form string="🤖 AI Trợ lý QLKH">
+                    <sheet>
+                        <!-- Header Banner -->
+                        <div style="background: linear-gradient(135deg, #6366f1, #8b5cf6, #ec4899);
+                                    color: white; padding: 15px 20px; border-radius: 12px;
+                                    margin-bottom: 15px; display: flex; align-items: center; gap: 12px;">
+                            <div style="font-size: 32px;">🤖</div>
+                            <div>
+                                <div style="font-size: 16px; font-weight: bold;">AI Trợ lý Thông minh QLKH</div>
+                                <div style="font-size: 11px; opacity: 0.9;">
+                                    Powered by Google Gemini · Dữ liệu nội bộ Odoo · Trả lời tức thì
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Chat History Area -->
+                        <div style="border: 1px solid #e2e8f0; border-radius: 12px;
+                                    min-height: 320px; max-height: 400px; overflow-y: auto;
+                                    background: white; padding: 5px; margin-bottom: 12px;">
+                            <field name="chat_history" widget="html" readonly="1" nolabel="1"
+                                   options="{'collaborative': false}"/>
+                        </div>
+
+                        <!-- Suggested Questions -->
+                        <div style="margin-bottom: 10px;">
+                            <div style="font-size: 11px; color: #64748b; margin-bottom: 6px; font-weight: 600;">
+                                💡 Câu hỏi gợi ý:
+                            </div>
+                            <div style="display: flex; flex-wrap: wrap; gap: 6px;">
+                                <span style="background: #f0f9ff; border: 1px solid #bae6fd; color: #0369a1;
+                                             padding: 3px 10px; border-radius: 20px; font-size: 11px; cursor: pointer;">
+                                    Hợp đồng sắp hết hạn?
+                                </span>
+                                <span style="background: #f0fdf4; border: 1px solid #bbf7d0; color: #166534;
+                                             padding: 3px 10px; border-radius: 20px; font-size: 11px; cursor: pointer;">
+                                    Tổng giá trị hợp đồng là bao nhiêu?
+                                </span>
+                                <span style="background: #fef3c7; border: 1px solid #fde68a; color: #92400e;
+                                             padding: 3px 10px; border-radius: 20px; font-size: 11px; cursor: pointer;">
+                                    Quy trình ký hợp đồng?
+                                </span>
+                                <span style="background: #fdf4ff; border: 1px solid #e9d5ff; color: #6b21a8;
+                                             padding: 3px 10px; border-radius: 20px; font-size: 11px; cursor: pointer;">
+                                    Khách hàng ở giai đoạn nào?
+                                </span>
+                            </div>
+                        </div>
+
+                        <!-- Input Area -->
+                        <group>
+                            <field name="question" string="✏️ Câu hỏi"
+                                   placeholder="Nhập câu hỏi... Ví dụ: Khách hàng này có hợp đồng nào đang thực hiện không?"
+                                   nolabel="1"/>
+                            <!-- Hidden fields -->
+                            <field name="messages_json" invisible="1"/>
+                            <field name="res_model" invisible="1"/>
+                            <field name="res_id" invisible="1"/>
+                            <field name="context_type" invisible="1"/>
+                        </group>
+
+                    </sheet>
+                    <footer>
+                        <button name="action_send_question" type="object"
+                                string="📨 Gửi câu hỏi" class="btn-primary oe_highlight"/>
+                        <button name="action_clear_chat" type="object"
+                                string="🗑️ Xóa lịch sử" class="btn-secondary"/>
+                        <button string="✖ Đóng" special="cancel" class="btn-secondary"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action to open Chatbot -->
+        <record id="action_ai_chatbot_general" model="ir.actions.act_window">
+            <field name="name">🤖 AI Trợ lý QLKH</field>
+            <field name="res_model">ai.chatbot.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_ai_chatbot_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+
+        <!-- Server Action to open chatbot from Customer form -->
+        <record id="action_open_chatbot_from_customer" model="ir.actions.server">
+            <field name="name">🤖 Hỏi AI về khách hàng này</field>
+            <field name="model_id" ref="model_khach_hang"/>
+            <field name="binding_model_id" ref="model_khach_hang"/>
+            <field name="state">code</field>
+            <field name="code">
+action = env['ai.chatbot.wizard'].action_open_chatbot(res_model='khach_hang', res_id=record.id)
+            </field>
+        </record>
+
+        <!-- Server Action to open chatbot from Contract form -->
+        <record id="action_open_chatbot_from_contract" model="ir.actions.server">
+            <field name="name">🤖 Hỏi AI về hợp đồng này</field>
+            <field name="model_id" ref="model_hop_dong"/>
+            <field name="binding_model_id" ref="model_hop_dong"/>
+            <field name="state">code</field>
+            <field name="code">
+action = env['ai.chatbot.wizard'].action_open_chatbot(res_model='hop_dong', res_id=record.id)
+            </field>
+        </record>
+    </data>
+</odoo>

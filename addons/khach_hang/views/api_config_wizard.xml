@@ -1,0 +1,105 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <!-- Wizard View: Cấu hình API Keys (AI + Telegram) -->
+        <record id="view_api_config_wizard_form" model="ir.ui.view">
+            <field name="name">api.config.wizard.form</field>
+            <field name="model">api.config.wizard</field>
+            <field name="arch" type="xml">
+                <form string="⚙️ Cấu hình AI &amp; Telegram API">
+                    <sheet>
+                        <!-- AI SECTION -->
+                        <div style="background: linear-gradient(135deg, #4285F4, #34A853); color: white; padding: 18px 20px; border-radius: 10px; margin-bottom: 20px;">
+                            <h3 style="margin: 0 0 5px 0; font-size: 16px;">
+                                <i class="fa fa-magic"/> 🤖 Tính năng AI: Phân tích Hợp đồng
+                            </h3>
+                            <p style="margin: 0; font-size: 12px; opacity: 0.9;">
+                                Upload file PDF/ảnh hợp đồng → AI tự động OCR và điền thông tin vào bản ghi Odoo.<br/>
+                                Sử dụng Google Gemini Vision API (miễn phí 1500 request/ngày).
+                            </p>
+                        </div>
+
+                        <group string="Google Gemini API Key">
+                            <group>
+                                <field name="gemini_api_key" 
+                                       string="API Key" 
+                                       placeholder="AIzaSy... (Lấy tại aistudio.google.com/apikey)"
+                                       password="True"/>
+                            </group>
+                            <group>
+                                <div>
+                                    <p style="margin: 5px 0; color: #666; font-size: 12px;">
+                                        📌 Lấy API Key miễn phí:<br/>
+                                        → Truy cập <a href="https://aistudio.google.com/apikey" target="_blank">https://aistudio.google.com/apikey</a><br/>
+                                        → Đăng nhập Google Account<br/>
+                                        → Nhấn "Create API Key"
+                                    </p>
+                                </div>
+                            </group>
+                        </group>
+
+                        <div style="margin-bottom: 20px;">
+                            <button name="action_test_gemini" type="object"
+                                    string="🧪 Test Gemini API" class="btn-primary"/>
+                        </div>
+
+                        <!-- TELEGRAM SECTION -->
+                        <div style="background: linear-gradient(135deg, #2AABEE, #229ED9); color: white; padding: 18px 20px; border-radius: 10px; margin-bottom: 20px; margin-top: 10px;">
+                            <h3 style="margin: 0 0 5px 0; font-size: 16px;">
+                                <i class="fa fa-paper-plane"/> 📱 Tính năng External API: Telegram
+                            </h3>
+                            <p style="margin: 0; font-size: 12px; opacity: 0.9;">
+                                Gửi thông báo hợp đồng qua Telegram. Cron Job tự động chạy mỗi ngày 08:00.<br/>
+                                Sử dụng Telegram Bot API (hoàn toàn miễn phí, không giới hạn).
+                            </p>
+                        </div>
+
+                        <group string="Telegram Bot Configuration">
+                            <group>
+                                <field name="telegram_bot_token"
+                                       string="Bot Token"
+                                       placeholder="123456789:ABCdefGhIJK..."
+                                       password="True"/>
+                                <field name="telegram_chat_id"
+                                       string="Chat ID"
+                                       placeholder="-1001234567890 hoặc @channel_name"/>
+                            </group>
+                            <group>
+                                <div>
+                                    <p style="margin: 5px 0; color: #666; font-size: 12px;">
+                                        📌 Cách tạo Telegram Bot:<br/>
+                                        1. Tìm @BotFather trên Telegram<br/>
+                                        2. Nhắn <b>/newbot</b> → Đặt tên → Lấy Token<br/>
+                                        3. Add bot vào nhóm/kênh<br/>
+                                        4. Vào <code>api.telegram.org/bot{token}/getUpdates</code><br/>
+                                        5. Lấy <b>chat.id</b> từ kết quả JSON
+                                    </p>
+                                </div>
+                            </group>
+                        </group>
+
+                        <div style="margin-bottom: 20px;">
+                            <button name="action_test_telegram" type="object"
+                                    string="📱 Test gửi Telegram" class="btn-info"/>
+                        </div>
+
+                    </sheet>
+                    <footer>
+                        <button name="action_save_config" type="object"
+                                string="💾 Lưu cấu hình" class="btn-primary oe_highlight"/>
+                        <button string="Đóng" class="btn-secondary" special="cancel"/>
+                    </footer>
+                </form>
+            </field>
+        </record>
+
+        <!-- Action để mở Wizard từ menu -->
+        <record id="action_api_config_wizard" model="ir.actions.act_window">
+            <field name="name">⚙️ Cấu hình AI &amp; Telegram</field>
+            <field name="res_model">api.config.wizard</field>
+            <field name="view_mode">form</field>
+            <field name="view_id" ref="view_api_config_wizard_form"/>
+            <field name="target">new</field>
+        </record>
+    </data>
+</odoo>

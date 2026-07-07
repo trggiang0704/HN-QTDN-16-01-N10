@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data noupdate="1">
+        <!-- 
+            Cron Job: Cảnh báo hợp đồng sắp hết hạn qua Telegram
+            Chạy: Mỗi ngày lúc 08:00 sáng (UTC+7 = 01:00 UTC)
+            Model: hop_dong
+            Method: cron_telegram_expiry_warning()
+        -->
+        <record id="ir_cron_telegram_expiry_warning" model="ir.cron">
+            <field name="name">QLKH: Gửi cảnh báo hợp đồng sắp hết hạn qua Telegram</field>
+            <field name="model_id" ref="model_hop_dong"/>
+            <field name="state">code</field>
+            <field name="code">model.cron_telegram_expiry_warning()</field>
+            <!-- Chạy hàng ngày lúc 8:00 sáng (giờ server UTC, UTC+7 = 01:00 UTC) -->
+            <field name="interval_number">1</field>
+            <field name="interval_type">days</field>
+            <field name="numbercall">-1</field>
+            <field name="active">True</field>
+            <field name="priority">5</field>
+        </record>
+    </data>
+</odoo>

@@ -78,6 +78,61 @@
             </field>
         </record>
 
+        <!-- Kanban View of Employees -->
+        <record id="view_nhan_vien_kanban" model="ir.ui.view">
+            <field name="name">nhan.vien.kanban</field>
+            <field name="model">nhan_vien</field>
+            <field name="arch" type="xml">
+                <kanban default_group_by="don_vi_hien_tai_id" class="o_kanban_small_column" create="true">
+                    <field name="id"/>
+                    <field name="ho_va_ten"/>
+                    <field name="chuc_vu_hien_tai_id"/>
+                    <field name="don_vi_hien_tai_id"/>
+                    <field name="email"/>
+                    <field name="que_quan"/>
+                    <field name="anh"/>
+                    <templates>
+                        <t t-name="kanban-box">
+                            <div class="oe_kanban_global_click o_kanban_record_has_image_fill" style="border-radius: 8px; border-top: 4px solid #9b59b6; box-shadow: 0 4px 6px rgba(0,0,0,0.05); padding: 15px; margin-bottom: 15px; background: white; min-width: 250px;">
+                                <div class="o_kanban_image_fill_left d-none d-md-block" style="border-radius: 50%; overflow: hidden; width: 70px; height: 70px; margin: auto; border: 2px solid #eee;">
+                                    <t t-if="record.anh.raw_value">
+                                        <img t-att-src="kanban_image('nhan_vien', 'anh', record.id.raw_value)" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;"/>
+                                    </t>
+                                    <t t-else="">
+                                        <img src="/web/static/img/placeholder.png" alt="Avatar" style="width: 100%; height: 100%; object-fit: cover;"/>
+                                    </t>
+                                </div>
+                                <div class="oe_kanban_details" style="text-align: center; margin-top: 10px;">
+                                    <strong class="o_kanban_record_title" style="font-size: 15px; color: #2d3748; display: block; margin-bottom: 5px;">
+                                        <field name="ho_va_ten"/>
+                                    </strong>
+                                    
+                                    <div style="margin-bottom: 8px;">
+                                        <span class="badge badge-pill" style="background-color: #f4ecf7; color: #8e44ad; font-size: 10px; padding: 4px 10px; font-weight: bold; text-transform: uppercase;">
+                                            <field name="chuc_vu_hien_tai_id"/>
+                                        </span>
+                                    </div>
+                                    
+                                    <div style="font-size: 11px; color: #718096; margin-bottom: 4px; text-align: left;">
+                                        <i class="fa fa-envelope" style="color: #9b59b6; margin-right: 5px;"></i> Email: <field name="email"/>
+                                    </div>
+                                    <div style="font-size: 11px; color: #718096; margin-bottom: 12px; text-align: left;">
+                                        <i class="fa fa-map-marker" style="color: #e74c3c; margin-right: 5px;"></i> Quê quán: <field name="que_quan"/>
+                                    </div>
+
+                                    <!-- Buttons -->
+                                    <div style="display: flex; gap: 10px; justify-content: center; border-top: 1px solid #edf2f7; padding-top: 10px;">
+                                        <a type="open" class="btn btn-sm btn-outline-primary" role="button" style="border-radius: 4px; padding: 3px 15px; font-size: 11px; color: #9b59b6; border-color: #9b59b6; cursor: pointer;">Xem</a>
+                                        <a type="edit" class="btn btn-sm btn-primary" role="button" style="border-radius: 4px; padding: 3px 15px; font-size: 11px; background-color: #9b59b6; border-color: #9b59b6; color: white; cursor: pointer;">Sửa</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </t>
+                    </templates>
+                </kanban>
+            </field>
+        </record>
+
         <record id="view_nhan_vien_tree" model="ir.ui.view">
             <field name="name">nhan.vien.tree</field>
             <field name="model">nhan_vien</field>
@@ -122,7 +177,7 @@
         <record id="action_nhan_vien" model="ir.actions.act_window">
             <field name="name">Nhân viên</field>
             <field name="res_model">nhan_vien</field>
-            <field name="view_mode">tree,form</field>
+            <field name="view_mode">kanban,tree,form</field>
             <field name="search_view_id" ref="nhan_vien_search"/>
         </record>
     </data>

@@ -26,6 +26,7 @@
     # always loaded
     'data': [
         'security/ir.model.access.csv',
+        'views/nhan_su_dashboard.xml',
         'views/chuc_vu.xml',
         'views/don_vi.xml',
         'views/nhan_vien.xml',

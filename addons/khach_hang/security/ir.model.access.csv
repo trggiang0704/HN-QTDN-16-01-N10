@@ -7,3 +7,6 @@ access_lich_su_tuong_tac,lich_su_tuong_tac_all,model_lich_su_tuong_tac,base.grou
 access_bao_gia,bao_gia_all,model_bao_gia,base.group_user,1,1,1,1
 access_bao_gia_chi_tiet,access_bao_gia_chi_tiet,model_bao_gia_chi_tiet,base.group_user,1,1,1,1
 access_tai_lieu_phap_ly,tai_lieu_phap_ly_all,model_tai_lieu_phap_ly,base.group_user,1,1,1,1
+access_khach_hang_dashboard,khach_hang.dashboard,model_khach_hang_dashboard,base.group_user,1,1,1,1
+access_api_config_wizard,api_config_wizard,model_api_config_wizard,base.group_user,1,1,1,1
+access_ai_chatbot_wizard,ai_chatbot_wizard,model_ai_chatbot_wizard,base.group_user,1,1,1,1

@@ -24,13 +24,7 @@ class KhachHang(models.Model):
     # 1. TÍCH HỢP LƯU TRỮ HỢP ĐỒNG (Thêm trường liên kết)
     hop_dong_ids = fields.One2many('hop_dong', 'khach_hang_id', string="Hợp đồng đã ký")
 
-    # 2. TÍCH HỢP VĂN BẢN ĐẾN (Sửa domain để hiện cả 'hoan_tat')
-    van_ban_ids = fields.One2many(
-        'quan_ly_van_ban', 
-        'khach_hang_id', 
-        string="Văn bản liên quan",
-        domain=[('trang_thai', 'in', ['da_ky', 'hoan_tat'])] 
-    )
+
 
     giai_doan = fields.Selection([
         ('tiep_can', 'Tiếp cận'),
@@ -54,7 +48,6 @@ class KhachHang(models.Model):
     # --- UI UPGRADE FIELDS & METHODS ---
     display_dashboard = fields.Html(compute='_compute_display_dashboard', string="Bảng tổng quan")
     hop_dong_count = fields.Integer(compute='_compute_hop_dong_count')
-    van_ban_count = fields.Integer(compute='_compute_van_ban_count')
 
     def _compute_display_dashboard(self):
         for rec in self:
@@ -82,27 +75,12 @@ class KhachHang(models.Model):
         for rec in self:
             rec.hop_dong_count = len(rec.hop_dong_ids)
 
-    def _compute_van_ban_count(self):
-        for rec in self:
-            rec.van_ban_count = len(rec.van_ban_ids)
-
     def action_view_hop_dong(self):
         self.ensure_one()
         return {
             'type': 'ir.actions.act_window',
             'name': 'Hợp đồng của khách hàng',
             'res_model': 'hop_dong',
-            'view_mode': 'tree,form',
-            'domain': [('khach_hang_id', '=', self.id)],
-            'context': {'default_khach_hang_id': self.id},
-        }
-
-    def action_view_van_ban(self):
-        self.ensure_one()
-        return {
-            'type': 'ir.actions.act_window',
-            'name': 'Văn bản liên quan',
-            'res_model': 'quan_ly_van_ban',
             'view_mode': 'tree,form',
             'domain': [('khach_hang_id', '=', self.id)],
             'context': {'default_khach_hang_id': self.id},
@@ -132,3 +110,11 @@ class KhachHang(models.Model):
 
     def action_set_fail(self):
         self.giai_doan = 'that_bai'
+
+    def action_open_ai_chatbot(self):
+        """Mở AI Chatbot với ngữ cảnh khách hàng hiện tại"""
+        self.ensure_one()
+        return self.env['ai.chatbot.wizard'].action_open_chatbot(
+            res_model='khach_hang',
+            res_id=self.id
+        )

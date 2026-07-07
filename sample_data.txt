@@ -1,0 +1,119 @@
+========================================================================
+           DANH SÁCH MẪU DỮ LIỆU ĐỂ TEST HỆ THỐNG ERP (AAHK)
+========================================================================
+
+Dưới đây là 4 mẫu dữ liệu thực tế kết hợp liên kết giữa Khách hàng, 
+Hợp đồng và Công văn (đến/đi) để bạn dễ dàng nhập thử vào Odoo.
+
+------------------------------------------------------------------------
+MẪU 1: KHÁCH HÀNG DOANH NGHIỆP CÔNG NGHỆ (DỊCH VỤ CLOUD)
+------------------------------------------------------------------------
+[1. Tạo Khách hàng trong CRM]
+- Tên khách hàng: Công ty Cổ phần Công nghệ Atech Việt Nam
+- Loại khách hàng: Tạo trực tiếp
+- Doanh thu dự kiến: 120000000
+- Số điện thoại: 0912345678
+- Email: contact@atech.vn
+- Địa chỉ: Tầng 5, Tòa nhà Keangnam, Cầu Giấy, Hà Nội
+- Giai đoạn: Đàm phán
+- Ghi chú nội bộ: Khách hàng cần thuê hệ thống Cloud Server để chạy ứng dụng thương mại điện tử. Yêu cầu băng thông tối thiểu 100Mbps.
+
+--> Thao tác Test: Sau khi lưu Khách hàng này, hãy bấm nút "Ký hợp đồng" ở thanh tiêu đề. Odoo sẽ tự động sinh ra một hợp đồng liên kết trị giá 120.000.000 VNĐ.
+
+[2. Tạo Văn bản đến liên quan]
+- Số hiệu: 24/CV-AT
+- Tên văn bản: Đơn đề xuất nâng cấp băng thông đường truyền kết nối
+- Luồng văn bản: Văn bản đến
+- Hình thức văn bản: Công văn
+- Ngày ban hành: (Chọn ngày hôm nay)
+- Khách hàng: Công ty Cổ phần Công nghệ Atech Việt Nam
+- Nội dung tóm tắt: Khách hàng đề xuất nâng cấp băng thông từ 100Mbps lên 200Mbps để chuẩn bị cho đợt khuyến mãi lớn cuối năm.
+
+[3. Tạo Văn bản đi trả lời]
+- Số hiệu: 105/TB-AAHK
+- Tên văn bản: Thông báo chấp thuận nâng cấp dịch vụ và gửi phụ lục điều chỉnh
+- Luồng văn bản: Văn bản đi
+- Hình thức văn bản: Thông báo
+- Ngày ban hành: (Chọn ngày hôm nay)
+- Khách hàng: Công ty Cổ phần Công nghệ Atech Việt Nam
+- Nội dung tóm tắt: Ban quản trị công ty AAHK chấp thuận nâng cấp băng thông lên 200Mbps cho Atech, chi phí phụ trội cộng thêm là 2.000.000 VNĐ/tháng.
+
+
+------------------------------------------------------------------------
+MẪU 2: KHÁCH HÀNG VẬN TẢI (DỊCH VỤ ĐỊNH VỊ GPS)
+------------------------------------------------------------------------
+[1. Tạo Khách hàng trong CRM]
+- Tên khách hàng: Hợp tác xã Vận tải Thành Công
+- Loại khách hàng: Tạo trực tiếp
+- Doanh thu dự kiến: 45000000
+- Số điện thoại: 0988777666
+- Email: info@vantai-thanhcong.com
+- Địa chỉ: 450 Quốc lộ 1A, Quận 12, TP. Hồ Chí Minh
+- Giai đoạn: Tiếp cận
+- Ghi chú nội bộ: Khách hàng muốn lắp đặt thiết bị giám sát hành trình cho đội xe 50 xe tải. Cần báo giá chi tiết thiết bị và phí duy trì server hàng năm.
+
+[2. Tạo Văn bản đến liên quan]
+- Số hiệu: 112/CV-TXTC
+- Tên văn bản: Công văn yêu cầu báo giá thiết bị giám sát hành trình GPS
+- Luồng văn bản: Văn bản đến
+- Hình thức văn bản: Công văn
+- Ngày ban hành: (Chọn ngày hôm nay)
+- Khách hàng: Hợp tác xã Vận tải Thành Công
+- Nội dung tóm tắt: Khách hàng gửi yêu cầu cung cấp báo giá chi tiết cho 50 bộ thiết bị GPS mã hợp chuẩn cùng các chính sách bảo hành, chiết khấu số lượng lớn.
+
+[3. Tạo Văn bản đi trả lời]
+- Số hiệu: 120/BG-AAHK
+- Tên văn bản: Báo giá thiết bị định vị GPS và dịch vụ phần mềm quản lý hành trình
+- Luồng văn bản: Văn bản đi
+- Hình thức văn bản: Báo cáo
+- Ngày ban hành: (Chọn ngày hôm nay)
+- Khách hàng: Hợp tác xã Vận tải Thành Công
+- Nội dung tóm tắt: Gửi bảng báo giá chi tiết thiết bị định vị giá 900.000 VNĐ/bộ và phí phần mềm server hàng năm là 600.000 VNĐ/xe.
+
+
+------------------------------------------------------------------------
+MẪU 3: KHÁCH HÀNG BÁN LẺ (DỊCH VỤ PHẦN MỀM POS)
+------------------------------------------------------------------------
+[1. Tạo Khách hàng trong CRM]
+- Tên khách hàng: Chuỗi Cửa hàng Thực phẩm Sạch GreenLife
+- Loại khách hàng: Tạo trực tiếp
+- Doanh thu dự kiến: 85000000
+- Số điện thoại: 0905123456
+- Email: admin@greenlife-mart.vn
+- Địa chỉ: 12 Hùng Vương, Hải Châu, Đà Nẵng
+- Giai đoạn: Đã kết nối
+- Ghi chú nội bộ: Chuỗi siêu thị mini có 10 chi nhánh cần triển khai phần mềm quản lý bán hàng POS tích hợp thanh toán mã QR và quản lý kho trung tâm.
+
+[2. Tạo Văn bản đến liên quan]
+- Số hiệu: 05/ĐĐN-GL
+- Tên văn bản: Đơn đề nghị khảo sát hạ tầng kỹ thuật tại các chi nhánh cửa hàng
+- Luồng văn bản: Văn bản đến
+- Hình thức văn bản: Đơn
+- Ngày ban hành: (Chọn ngày hôm nay)
+- Khách hàng: Chuỗi Cửa hàng Thực phẩm Sạch GreenLife
+- Nội dung tóm tắt: Khách hàng yêu cầu cử đội ngũ kỹ thuật đến khảo sát trực tiếp hạ tầng mạng và máy tính tại 10 cửa hàng để chuẩn bị cài đặt phần mềm.
+
+[3. Tạo Văn bản đi trả lời]
+- Số hiệu: 156/QĐ-AAHK
+- Tên văn bản: Quyết định cử nhân sự kỹ thuật đi khảo sát và triển khai phần mềm
+- Luồng văn bản: Văn bản đi
+- Hình thức văn bản: Quyết định
+- Ngày ban hành: (Chọn ngày hôm nay)
+- Khách hàng: Chuỗi Cửa hàng Thực phẩm Sạch GreenLife
+- Nội dung tóm tắt: Giám đốc công ty AAHK ký quyết định điều động 3 kỹ sư phòng kỹ thuật đi khảo sát thực tế tại Đà Nẵng từ ngày mai.
+
+
+------------------------------------------------------------------------
+MẪU 4: VĂN BẢN NỘI BỘ DOANH NGHIỆP (KHÔNG LIÊN KẾT KHÁCH HÀNG)
+------------------------------------------------------------------------
+[Tạo Văn bản nội bộ trong Quản lý Văn bản]
+- Số hiệu: 01/QĐ-AAHK
+- Tên văn bản: Quyết định ban hành Quy chế bảo mật dữ liệu khách hàng CRM
+- Luồng văn bản: Nội bộ
+- Hình thức văn bản: Quyết định
+- Ngày ban hành: (Chọn ngày hôm nay)
+- Khách hàng: (Để trống - vì đây là văn bản nội bộ công ty)
+- Nội dung tóm tắt: Ban hành quy định bắt buộc toàn bộ nhân viên kinh doanh không được tự ý xuất khẩu hoặc chia sẻ thông tin liên lạc của khách hàng ra bên ngoài doanh nghiệp.
+
+--> Quy tắc hoạt động: Vì đây là văn bản "Nội bộ", trường Khách hàng liên quan sẽ tự động khóa hoặc ẩn đi để tránh nhầm lẫn dữ liệu ra ngoài.
+========================================================================

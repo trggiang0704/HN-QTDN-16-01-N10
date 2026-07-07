@@ -1,7 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <odoo>
     <data>
+        <record id="action_open_crm_dashboard" model="ir.actions.server">
+            <field name="name">Tổng quan</field>
+            <field name="model_id" ref="model_khach_hang_dashboard"/>
+            <field name="state">code</field>
+            <field name="code">
+                action = model.action_get_dashboard()
+            </field>
+        </record>
+
         <menuitem id="menu_kh_root_final" name="Quản lý Khách hàng" sequence="20"/>
+
+        <menuitem id="menu_kh_dashboard" name="Tổng quan" 
+                  parent="menu_kh_root_final" 
+                  action="action_open_crm_dashboard" 
+                  sequence="5"/>
 
         <menuitem id="menu_kh_main_final" name="Khách hàng" parent="menu_kh_root_final" sequence="10"/>
         
@@ -30,6 +44,19 @@
         <menuitem id="menu_bao_gia_list" name="Báo giá" 
                   parent="menu_giao_dich_root" 
                   action="action_bao_gia" 
+                  sequence="5"/>
+
+        <!-- Cấu hình AI & Telegram -->
+        <menuitem id="menu_kh_config_root" name="Cấu hình" parent="menu_kh_root_final" sequence="99"/>
+
+        <menuitem id="menu_api_config" name="⚙️ Cấu hình AI &amp; Telegram" 
+                  parent="menu_kh_config_root"
+                  action="action_api_config_wizard"
+                  sequence="10"/>
+
+        <menuitem id="menu_ai_chatbot" name="🤖 AI Trợ lý Chatbot"
+                  parent="menu_kh_config_root"
+                  action="action_ai_chatbot_general"
                   sequence="5"/>
     </data>
 </odoo>
